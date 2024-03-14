@@ -2,7 +2,7 @@ from typing import Dict, List
 import pandas as pd
 
 
-def vote_result_context():
+def legislator_result_context():
     df_vote_result = load_vote_result()
     df_legislators = load_legislators()
 

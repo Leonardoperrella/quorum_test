@@ -1,5 +1,5 @@
 import pandas as pd
-from quorum.services.vote_result_service import vote_result_context
+from quorum.services.legislator_result_service import legislator_result_context
 
 
 def test_vote_result_context(mocker):
@@ -14,7 +14,7 @@ def test_vote_result_context(mocker):
     df_volte_results = pd.DataFrame(volte_results_data)
 
     mocker.patch(
-        "quorum.services.vote_result_service.load_vote_result",
+        "quorum.services.legislator_result_service.load_vote_result",
         return_value=df_volte_results
     )
 
@@ -27,11 +27,11 @@ def test_vote_result_context(mocker):
     df_legislators_data = pd.DataFrame(legislators_data)
 
     mocker.patch(
-        "quorum.services.vote_result_service.load_legislators",
+        "quorum.services.legislator_result_service.load_legislators",
         return_value=df_legislators_data
     )
 
-    assert vote_result_context()[0] == {
+    assert legislator_result_context()[0] == {
         "id": 1,
         "name": "Lorem",
         "suported_bills": 1,
