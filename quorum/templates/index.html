@@ -15,12 +15,35 @@
                     <th>Opposed bills</th>
                 </thead>
                 <tbody>
-                    {% for item in vote_result %}
+                    {% for item in legislator_result %}
                         <tr>
                             <td>{{ item.id }}</td>
                             <td>{{ item.name }}</td>
                             <td>{{ item.suported_bills }}</td>
                             <td>{{ item.opposed_bills }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <h1>Question 2</h1>
+        <div class="first">
+            <table>
+                <thead>
+                    <th>ID</th>
+                    <th>Bill</th>
+                    <th>Supporters</th>
+                    <th>Opposers</th>
+                    <th>Primary Sponsor</th>
+                </thead>
+                <tbody>
+                    {% for item in bill_result %}
+                        <tr>
+                            <td>{{ item.id }}</td>
+                            <td>{{ item.title }}</td>
+                            <td>{{ item.supporters }}</td>
+                            <td>{{ item.opposers }}</td>
+                            <td>{{ item.primary_sponsor }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>
