@@ -1,6 +1,8 @@
 from typing import Dict, List
 import pandas as pd
 
+from quorum.services.db_service import load_legislators, load_vote_result
+
 
 def legislator_result_context():
     df_vote_result = load_vote_result()
@@ -17,18 +19,6 @@ def legislator_result_context():
     resolve_votes(df_merged, result)
 
     return result
-
-
-def load_vote_result() -> pd.DataFrame:
-    return csv_to_df('quorum/db/csv/vote_results.csv')
-
-
-def load_legislators() -> pd.DataFrame:
-    return csv_to_df('quorum/db/csv/legislators.csv')
-
-
-def csv_to_df(path: str) -> pd.DataFrame:
-    return pd.read_csv(path)
 
 
 def mount_base_structure(df: pd.DataFrame) -> List[Dict]:
