@@ -14,7 +14,9 @@ def legislator_result_context():
     df_merged = pd.merge(df_grouped_vote_result, df_legislators, how='inner',
                          left_on='legislator_id', right_on='id', validate=None)
 
-    result = mount_base_structure(df_merged)
+    df_legislator_unified = df_merged[[
+        'legislator_id', 'name']].drop_duplicates()
+    result = mount_base_structure(df_legislator_unified)
 
     resolve_votes(df_merged, result)
 
@@ -22,11 +24,8 @@ def legislator_result_context():
 
 
 def mount_base_structure(df: pd.DataFrame) -> List[Dict]:
-    df_legislator_unified = df[[
-        'legislator_id', 'name']].drop_duplicates()
-
     base_structure = []
-    for _, row in df_legislator_unified.iterrows():
+    for _, row in df.iterrows():
         base_structure.append({
 
             "id": row['legislator_id'],

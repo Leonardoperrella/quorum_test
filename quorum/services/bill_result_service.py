@@ -24,7 +24,10 @@ def bill_result_context():
     df_merged = pd.merge(df_merged, df_vote_results, how='inner',
                          left_on='id', right_on='vote_id', validate=None)
 
-    result = mount_base_structure(df_merged)
+    df_bills_unified = df_merged[[
+        'id_bill', 'title', 'name']].drop_duplicates()
+
+    result = mount_base_structure(df_bills_unified)
 
     resolve_votes(df_merged, result)
 
@@ -32,11 +35,9 @@ def bill_result_context():
 
 
 def mount_base_structure(df: pd.DataFrame) -> List[Dict]:
-    df_bills_unified = df[[
-        'id_bill', 'title', 'name']].drop_duplicates()
 
     base_structure = []
-    for _, row in df_bills_unified.iterrows():
+    for _, row in df.iterrows():
         base_structure.append({
 
             "id": row['id_bill'],
@@ -51,8 +52,6 @@ def mount_base_structure(df: pd.DataFrame) -> List[Dict]:
 
 
 def resolve_votes(df: pd.DataFrame, result: List) -> None:
-    # import ipdb
-    # ipdb.set_trace()
     for _, row in df.iterrows():
         if d := next((item for item in result if item['id'] == row['id_bill']), None):
             if row['vote_type'] == 1:
