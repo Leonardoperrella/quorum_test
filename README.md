@@ -10,6 +10,24 @@
     pandas
     Jinja2
 
+## How to developer by zip file?
+
+    1. extract zip file
+    2. Create a virtualenv
+    3. Active o virtualenv
+    4. Install the dependencies.
+    5. Execute tests
+    6. Execute server
+
+```console
+cd leonardo_augusto_perrella
+python3 -m venv env
+source .env/bin/activate
+pip install -r requirements.txt
+pytest -vv
+uvicorn quorum.main:app
+```
+
 ## How to developer?
 
     1. Clone the repository
@@ -26,5 +44,5 @@ python3 -m venv env
 source .env/bin/activate
 pip install -r requirements.txt
 pytest -vv
-uvicorn quorum.main:app --reload
+uvicorn quorum.main:app
 ```
